@@ -1,0 +1,75 @@
+<p-messages life="4000" [(value)]="msgs"></p-messages>
+<div class="ui-g">
+  <div class="ui-g-12">
+    <div class="card card-w-title">
+      <p-panel header="Informacion" [toggleable]="true">
+        <div class="ui-g form-group">
+          <div class="ui-g-12 ui-md-3">
+            <div class="ui-g-12">
+             <label>Código</label>
+            </div>
+            <div class="ui-g-12">
+              <input #id="ngModel" [(ngModel)]="vehiculo.id" type="text" [disabled]="newVehiculo"
+                     pTooltip="Codigo" tooltipPosition="bottom" (keyup)="validate()"
+                     pInputText [pattern]="pattern.id" required>
+            </div>
+            <div *ngIf="(codeCount > 0 && id.dirty)" class="ui-g-12">
+              <div class="ui-message ui-messages-error ui-corner-all">
+                <i class="fa fa-close"></i>
+                Este código ya está en uso
+              </div>
+            </div>
+            <div *ngIf="(id.errors?.required && id.dirty)" class="ui-g-12">
+              <div class="ui-message ui-messages-error ui-corner-all">
+                <i class="fa fa-close"></i>
+                Este campo es obligatorio
+              </div>
+            </div>
+          </div>
+
+
+          <div class="ui-g-12 ui-md-3">
+            <div class="ui-g-12">
+              <label>Modelo</label>
+            </div>
+            <div class="ui-g-12">
+              <input #modelo="ngModel" [(ngModel)]="vehiculo.modelo" type="text"
+                     pTooltip="Nombre de la Suscripción" tooltipPosition="bottom"
+                     pInputText [pattern]="pattern.namePattern" required>
+            </div>
+            <div *ngIf="(modelo.errors?.pattern && modelo.dirty)" class="ui-g-12">
+              <div class="ui-message ui-messages-error ui-corner-all">
+                <i class="fa fa-close"></i>
+                Este campo no debe sobrepasar los 50 caracteres
+              </div>
+            </div>
+            <div *ngIf="(modelo.errors?.required && modelo.dirty)" class="ui-g-12">
+              <div class="ui-message ui-messages-error ui-corner-all">
+                <i class="fa fa-close"></i>
+                Este campo es obligatorio
+              </div>
+            </div>
+          </div>
+
+        <div class="ui-g-12 ui-md-3">
+        <div class="ui-g-12">
+         <label>Tipo de Suscripcion</label>
+        </div>
+        <div class="ui-g-12">
+          <p-dropdown #suscri="ngModel" [options]="medioAccesoOptions" [(ngModel)]="selectedSuscriber"
+          name="suscri" pTooltip="Marca"
+          placeholder="Seleccionar Marca" required
+          [style]="{'width':'100%'}" optionLabel="name" [showClear]="true"></p-dropdown>
+               <div *ngIf="(suscri.errors?.required && suscri.dirty)" class="ui-g-12">
+                 <div class="ui-message ui-messages-error ui-corner-all">
+                   <i class="fa fa-close"></i>
+                   Este campo es obligatorio
+                 </div>
+               </div>
+        </div>
+        </div>
+        </div>
+      </p-panel>
+    </div>
+  </div>
+</div>

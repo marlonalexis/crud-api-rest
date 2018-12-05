@@ -18,4 +18,8 @@ public class VehiculoService {
 		return vehiculoRepository.findAll();
 	}
 	
+	public Boolean exist(Long code) {
+		return vehiculoRepository.exists(code);
+	}
+	
 }

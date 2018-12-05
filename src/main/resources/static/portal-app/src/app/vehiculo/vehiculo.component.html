@@ -1,0 +1,32 @@
+<h3>Dynamic Columns</h3>
+<button pButton type="button" (click)="agregar()" label="Nuevo"></button>
+<br/>
+<p-table [value]="vehiculos">
+    <ng-template pTemplate="header">
+        <tr>
+            <th>Id</th>
+            <th>Modelo</th>
+            <th>Marca</th>
+            <th>Anio</th>
+            <th>Precio</th>
+            <th>Fecha de creacion</th>
+            <th>Estado</th>
+            <th>Opciones</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-car>
+        <tr>
+            <td>{{car.id}}</td>
+            <td>{{car.modelo}}</td>
+            <td>{{car.marca.nombre}}</td>
+            <td>{{car.anio}}</td>
+            <td>{{car.precio}}</td>
+            <td>{{car.fecha_creacion | date: 'MM/dd/yyyy'}}</td>
+            <td>{{getStatusName(car.estado)}}</td>
+            <td>
+              <button pButton mdbWavesEffect type="button" (click)="editar(car)" label="Editar" class="ui-button-warning"></button>
+              <button pButton type="button" label="Eliminar" (click)="eliminar(car)" class="ui-button-danger"></button>
+            </td>
+        </tr>
+    </ng-template>
+</p-table>
