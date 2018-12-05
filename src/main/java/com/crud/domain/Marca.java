@@ -15,6 +15,7 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
@@ -38,9 +39,15 @@ public class Marca implements Serializable {
 	@Column(name = "pais")
 	private String pais;
 	
+	/*@JsonIgnore
 	@OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL, mappedBy="marca")
-	private List<Vehiculo> vehiculos;
+	private List<Vehiculo> vehiculos;*/
 
+	@OneToMany(cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY,
+            mappedBy = "marca")
+    private List<Vehiculo> vehiculos;
+	
 	public Long getId() {
 		return id;
 	}
@@ -65,17 +72,11 @@ public class Marca implements Serializable {
 		this.pais = pais;
 	}
 
-	public List<Vehiculo> getVehiculos() {
-		return vehiculos;
-	}
-
-	public void setVehiculos(List<Vehiculo> vehiculos) {
-		this.vehiculos = vehiculos;
-	}
-
 	@Override
 	public String toString() {
-		return "Marca [id=" + id + ", nombre=" + nombre + ", pais=" + pais + ", vehiculos=" + vehiculos + "]";
+		return "Marca [id=" + id + ", nombre=" + nombre + ", pais=" + pais + "]";
 	}
+
+
 
 }

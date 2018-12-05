@@ -5,6 +5,8 @@ import java.util.Date;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -23,8 +25,13 @@ public class Vehiculo implements Serializable {
 	@Column(name = "id")
 	private long id;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
+	/*@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="marca")
+	private Marca marca;*/
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="marca")
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private Marca marca;
 	
 	@Column(name = "modelo")
@@ -49,14 +56,6 @@ public class Vehiculo implements Serializable {
 
 	public void setId(long id) {
 		this.id = id;
-	}
-
-	public Marca getMarca() {
-		return marca;
-	}
-
-	public void setMarca(Marca marca) {
-		this.marca = marca;
 	}
 
 	public String getModelo() {
@@ -99,10 +98,27 @@ public class Vehiculo implements Serializable {
 		this.estado = estado;
 	}
 
+	public Marca getMarca() {
+		return marca;
+	}
+
+	public void setMarca(Marca marca) {
+		this.marca = marca;
+	}
+
 	@Override
 	public String toString() {
 		return "Vehiculo [id=" + id + ", marca=" + marca + ", modelo=" + modelo + ", anio=" + anio + ", precio="
 				+ precio + ", fecha_creacion=" + fecha_creacion + ", estado=" + estado + "]";
 	}
+
+/*	@Override
+	public String toString() {
+		return "Vehiculo [id=" + id + ", modelo=" + modelo + ", anio=" + anio + ", precio=" + precio
+				+ ", fecha_creacion=" + fecha_creacion + ", estado=" + estado + "]";
+	}*/
+	
+	
+
 	
 }
